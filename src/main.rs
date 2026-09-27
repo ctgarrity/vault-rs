@@ -1,36 +1,15 @@
-#[derive(Debug)]
-struct Entry {
-    url: String,
-    username: String,
-    password: String,
-    note: Option<String>,
-}
+use crate::vault::Vault;
 
-struct Vault {
-    entries: Vec<Entry>,
-}
-
-impl Vault {
-    fn list(&self) {
-        for entry in &self.entries[..] {
-            println!("{entry:?}");
-        }
-    }
-}
-
+mod vault;
 fn main() {
-    println!("Hello, world!");
-    let e1 = Entry {
-        url: String::from("www.google.com"),
-        username: String::from("conman"),
-        password: String::from("1234"),
-        note: None,
+    let entry = vault::Entry {
+        title: String::from("Test"),
+        username: String::from("ctg"),
+        password: String::from("123"),
+        notes: None,
+        website: None,
     };
 
-    let mut v1 = Vault {
-        entries: Vec::new(),
-    };
-
-    v1.entries.push(e1);
-    v1.list();
+    let mut vault = Vault::new();
+    vault.add(entry);
 }
